@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.fc.test.mapper.auto.TsysDatasMapper" >
+
   <resultMap id="BaseResultMap" type="com.fc.test.model.auto.TsysDatas" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="file_path" property="filePath" jdbcType="VARCHAR" />
   </resultMap>
+
+  <!--建立sql片段，经重复的sql提取出来，使用的时候include即可,打到SQL重用的目的-->
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -34,6 +37,7 @@
       </foreach>
     </where>
   </sql>
+
   <sql id="Update_By_Example_Where_Clause" >
     <where >
       <foreach collection="example.oredCriteria" item="criteria" separator="or" >
@@ -63,9 +67,11 @@
       </foreach>
     </where>
   </sql>
+
   <sql id="Base_Column_List" >
     id, file_path
   </sql>
+
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fc.test.model.auto.TsysDatasExample" >
     select
     <if test="distinct" >
@@ -81,7 +87,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from t_sys_datas
     where id = #{id,jdbcType=VARCHAR}
@@ -161,4 +167,5 @@
     set file_path = #{filePath,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
 </mapper>
